@@ -1,6 +1,6 @@
-import assert from 'assert'
-import { rehype } from 'rehype'
-import template from './index.js'
+import assert from 'assert';
+import { rehype } from 'rehype';
+import template from '../src/index';
 
 describe('rehype-lodash-template', () => {
   const values = {
@@ -15,7 +15,7 @@ describe('rehype-lodash-template', () => {
 
   const process = (file, options = {}) => rehype()
     .data({ settings: { fragment: true } })
-    .use(template, { values, ...options })
+    .use(template, { values, options })
     .process(file)
     .then(result => result.value)
 
@@ -47,7 +47,7 @@ describe('rehype-lodash-template', () => {
     assert.equal(received, expected)
   })
 
-  it('removes text node when itʼs nullish or empty', async () => {
+  it('removes text node when it\'s nullish or empty', async () => {
     const source = `
       <span><%= null %></span>
       <span><%- undefined %></span>
@@ -60,7 +60,7 @@ describe('rehype-lodash-template', () => {
     assert.equal(received, expected)
   })
 
-  it.skip('supports lodash.templateʼs script evaluation', () => {
+  it.skip('supports lodash.template\'s script evaluation', () => {
     // Tricky to implement, can be done upon a request or via a PR.
     // Personally, I don't need this feature so far.
     //
